@@ -1,5 +1,7 @@
 package com.jnj.devicemanager.data;
 
+import android.text.TextUtils;
+
 /**
  * Created by rl113 on 1/26/18.
  */
@@ -67,5 +69,21 @@ public class Device {
 
     public void setCheckedOut(boolean checkedOut) {
         isCheckedOut = checkedOut;
+    }
+
+    /**
+     * Construct the title for list display
+     * @return the device title for display
+     */
+    public String getTitleForList() {
+        String title = "";
+        if (!TextUtils.isEmpty(device) && !TextUtils.isEmpty(os)) {
+            title = device +"-"+os;
+        } else if(TextUtils.isEmpty(device) && !TextUtils.isEmpty(os)) {
+            title = os;
+        } else if(!TextUtils.isEmpty(device) && TextUtils.isEmpty(os)) {
+            title = device;
+        }
+        return title;
     }
 }

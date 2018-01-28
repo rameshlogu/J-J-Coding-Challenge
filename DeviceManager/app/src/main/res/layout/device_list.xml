@@ -12,17 +12,25 @@
             type="com.jnj.devicemanager.devicelist.DeviceListViewModel" />
     </data>
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/list_parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray">
 
         <TextView
             android:id="@+id/no_device_found"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewmodel.noDeviceTextField}"
-            android:layout_centerInParent="true"/>
+            android:layout_gravity="center"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/device_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:items="@{viewmodel.devices}"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_add_task"
@@ -30,8 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
             android:src="@drawable/ic_add"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
+            android:layout_gravity="right|bottom"
             android:onClick="@{()->viewmodel.addNewDevice()}"/>
-    </RelativeLayout>
+    </FrameLayout>
 </layout>

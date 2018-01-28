@@ -7,8 +7,10 @@ import android.databinding.ObservableList;
 
 import com.jnj.devicemanager.data.Device;
 
+import java.util.Random;
+
 /**
- * Created by rl113 on 1/26/18.
+ * View model for the device list view
  */
 
 public class DeviceListViewModel extends BaseObservable{
@@ -18,8 +20,15 @@ public class DeviceListViewModel extends BaseObservable{
     //Tag
     public static final String TAG = DeviceListViewModel.class.getName();
 
+   /**
+     * Provision to add a new device
+     */
     public void addNewDevice(){
-        noDeviceTextField.set("value has been changed");
+        Device device = new Device();
+        device.setDevice("Pixel "+ new Random().nextInt());
+        device.setOs("Android 8.0 "+new Random().nextInt());
+        device.setLastCheckedOutBy("Ramesh");
+        devices.add(device);
     }
 
 }

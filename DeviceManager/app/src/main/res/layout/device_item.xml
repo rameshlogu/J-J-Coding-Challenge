@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="deviceItemViewModel"
+            type="com.jnj.devicemanager.devicelist.adapter.DeviceListItemViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/list_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:layout_marginBottom="2dp"
+        android:gravity="center_vertical"
+        android:background="@android:color/white">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@{deviceItemViewModel.titleField}"
+            android:layout_marginBottom="3dp"
+            android:textSize="@dimen/text_size_medium"
+            android:singleLine="true"/>
+        <TextView
+            android:id="@+id/last_check_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{deviceItemViewModel.lastCheckedOutByField}"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/text_size_medium"
+            android:singleLine="true"/>
+    </LinearLayout>
+</layout>

@@ -1,22 +1,25 @@
 package com.jnj.devicemanager.devicelist;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jnj.devicemanager.data.Device;
 import com.jnj.devicemanager.databinding.DeviceListBinding;
+import com.jnj.devicemanager.devicelist.adapter.DeviceListAdapter;
 import com.jnj.devicemanager.util.FragmentManagerUtil;
 import com.jnj.devicemanager.util.ViewModelHolder;
+
+import java.util.ArrayList;
 
 /**
  * View to show/manage device list
  */
 
-public class DeviceListFragment extends Fragment implements DeviceListViewModelBridge{
+public class DeviceListFragment extends Fragment {
     private DeviceListBinding mListBinding;
     public static final String TAG = DeviceListFragment.class.getName();
 
@@ -28,7 +31,14 @@ public class DeviceListFragment extends Fragment implements DeviceListViewModelB
         mListBinding.setView(this);
         //Set the view model
         mListBinding.setViewmodel(getViewModel());
+        //Setup list adapter
+        setupListAdapter();
         return mListBinding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     /**
@@ -44,14 +54,11 @@ public class DeviceListFragment extends Fragment implements DeviceListViewModelB
         return modelHolder.getViewModel();
     }
 
-    @Override
-    public void showAddDeviceScreen() {
-        //TO-DO: show add device screen
-    }
-
-    @Override
-    public Context getViewContext() {
-        return getActivity().getBaseContext();
+    /**
+     * Set the list adapter
+     */
+    private void setupListAdapter(){
+        mListBinding.deviceList.setAdapter(new DeviceListAdapter(new ArrayList<Device>()));
     }
 }
 
