@@ -3,7 +3,7 @@ package com.jnj.devicemanager.data;
 import android.text.TextUtils;
 
 /**
- * Created by rl113 on 1/26/18.
+ * Model for the device
  */
 
 public class Device {

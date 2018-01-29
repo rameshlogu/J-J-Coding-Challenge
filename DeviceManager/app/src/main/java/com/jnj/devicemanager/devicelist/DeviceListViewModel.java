@@ -4,10 +4,16 @@ import android.databinding.BaseObservable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
+import android.support.annotation.MainThread;
 
 import com.jnj.devicemanager.data.Device;
+import com.jnj.devicemanager.data.remote.DeviceRemoteDataSource;
 
-import java.util.Random;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * View model for the device list view
@@ -20,15 +26,26 @@ public class DeviceListViewModel extends BaseObservable{
     //Tag
     public static final String TAG = DeviceListViewModel.class.getName();
 
+    public void loadDeviceList(){
+        DeviceRemoteDataSource.getInstance().loadDeviceList(new Callback<List<Device>>() {
+            @MainThread
+            @Override
+            public void onResponse(Call<List<Device>> call, Response<List<Device>> response) {
+                devices.clear();
+                devices.addAll(response.body());
+            }
+            @MainThread
+            @Override
+            public void onFailure(Call<List<Device>> call, Throwable t) {
+
+            }
+        });
+    }
    /**
      * Provision to add a new device
      */
     public void addNewDevice(){
-        Device device = new Device();
-        device.setDevice("Pixel "+ new Random().nextInt());
-        device.setOs("Android 8.0 "+new Random().nextInt());
-        device.setLastCheckedOutBy("Ramesh");
-        devices.add(device);
+        loadDeviceList();
     }
 
 }

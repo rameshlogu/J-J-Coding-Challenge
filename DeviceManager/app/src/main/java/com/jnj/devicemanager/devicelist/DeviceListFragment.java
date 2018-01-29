@@ -33,6 +33,7 @@ public class DeviceListFragment extends Fragment {
         mListBinding.setViewmodel(getViewModel());
         //Setup list adapter
         setupListAdapter();
+
         return mListBinding.getRoot();
     }
 
